@@ -1,0 +1,66 @@
+body{
+    background-color: black;
+}
+h1{
+    color: aliceblue;
+    text-align: center;
+}
+div{
+    background-color: rgb(28, 28, 36);
+    width: 400px;
+    height: 600px;
+    text-align: center;
+    border-radius: 10px;
+}
+.h1{
+    margin-top: 30px;
+    padding: 100px;
+}
+button{
+    size: 100px;
+    width: 300px;
+    height: 30px;
+    font-size: 15px;
+    border-radius: 5px;
+    background-color: aqua;
+    margin-top: 40px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: aquamarine;
+}
+h6{
+    color: aliceblue;
+    
+}
+
+h4{
+    color: aliceblue;
+    margin-top: 30px;
+}
+p{
+    color: aliceblue;
+}
+img{
+    height: 100px;
+    width: 100px;
+}
+
+input{
+    margin-top: 20px;
+        padding: 5px;
+        background-color: #eeeaea;
+        border: none;
+        border-radius: 2px;
+        text-align: left;
+        color: rgb(9, 1, 1);
+        width: 200px;
+        
+    }
+    li {
+        list-style-type: none;
+        text-align: center;
+        padding-bottom: 5%;
+        color: #eeeaea;
+        padding-right: 20px;
+    }

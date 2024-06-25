@@ -1,0 +1,72 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 50px;
+  }
+  .one{
+    text-align: center;
+  }
+  .two{
+    height: 10px;
+    width: 50px;
+  }
+  div{
+    height: 500px;
+    width: 600px;
+  }
+  input{
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border-color: rgb(255, 255, 255);
+  }
+  input:hover
+  {
+    background-color: antiquewhite;
+  }
+  .btn{
+    background-color: rgb(106, 233, 233);
+    border-color: black;
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .bt{
+    background-color: rgb(120, 235, 235);
+    border-color: black;
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .bt:hover{
+    background-color: antiquewhite;
+  }
+  .t{
+    height: 20px;
+    border: solid black;
+    width: 300px;
+    border-radius: 5px;
+    align-items: center;
+    margin-top: 5px;
+}
+.l{
+  height: 20px;
+      border: solid black;
+      width: 300px;
+      border-radius: 5px;
+      align-items: center;
+      margin-right: 40px;
+      margin-top: 5px;
+}
+#j{
+  background-color: aquamarine;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#j:hover{
+  background-color: aliceblue;
+}

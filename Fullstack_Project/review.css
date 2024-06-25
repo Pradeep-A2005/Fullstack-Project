@@ -1,0 +1,95 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 50px;
+  }
+  .one{
+    text-align: center;
+  }
+  .two{
+    height: 10px;
+    width: 50px;
+  }
+  div{
+    height: 100px;
+    width: 400px;
+  }
+  input{
+    height: 50px;
+    background-color: rgb(230, 233, 208);
+    text-align: center;
+    border-color: rgb(255, 255, 255);
+  }
+  input:hover
+  {
+    background-color: antiquewhite;
+  }
+  .b,.be{
+    background-color: rgb(32, 223, 223);
+    border-color: black;
+    margin-top: 50px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .t{
+      height: 20px;
+      border: solid black;
+      width: 300px;
+      border-radius: 5px;
+      align-items: center;
+      margin-top: 5px;
+  }
+  .bt{
+    background-color: rgb(92, 187, 187);
+    border-color: black;
+    margin-top: 50px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .bt:hover{
+    background-color: antiquewhite;
+  }
+  .b:hover{
+    background-color: antiquewhite;
+  }
+  .be:hover{
+    background-color: antiquewhite;
+  }
+  #j{
+    background-color: aquamarine;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .l{
+    height: 20px;
+      border: solid black;
+      width: 300px;
+      border-radius: 5px;
+      align-items: center;
+      margin-right: 40px;
+      margin-top: 5px;
+      box-shadow: 100px;
+      
+      
+  }
+  #j:hover{
+    background-color: aliceblue;
+    height: 25px;
+  }
+  #one{
+    display: inline-block;
+
+  }
+  #two{
+    display: inline-block;
+  }
+  body{
+    background-color: rgb(230, 233, 208);
+  }
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Communication Mark</title>
+    <link rel="stylesheet" href="team.css">
+    <link rel="icon" href="icon.png">
+
+</head>
+<body>
+
+    <center>
+    <h1><u>Team Communication Mark</u></h1>
+    <br>
+    <form action="">
+      <label>Student name:</label>
+      <input type="text" class="l">
+      <br>
+  <label>Ptac ID:</label>
+  <input type="Number" class="t">
+    </li>
+  </ol>
+    
+</form>
+      <br>
+
+    <div>
+    <table style="width:100%" >
+        <tr>
+          <th>S.No</th>
+          <th>Description</th>
+          <th>Marks(5)</th>
+        </tr>
+        <tr>
+          <td class="one">1.</td>
+          <td></td>
+          <td class="two"><input type="number" placeholder="Enter the mark" name="num1"></td>
+        </tr>
+        <tr>
+          <td class="one">2.</td>
+          <td></td>
+          <td class="two"><input type="number" placeholder="Enter the mark" name="num2"></td>
+        </tr>
+        <tr>
+          <td class="one">3.</td>
+          <td></td>
+          <td class="two"><input type="number" placeholder="Enter the mark" name="num3"></td>
+        </tr>
+        <tr>
+          <td class="one">4.</td>
+          <td></td>
+          <td class="two"><input type="number" placeholder="Enter the mark" name="num4"></td>
+        </tr>
+        <tr>
+          <td class="one" >5.</td>
+          <td></td>
+          <td class="two"><input type="number" placeholder="Enter the mark" name="num5"></td>
+        </tr>
+        <tr>
+          <td class="one">6.</td>
+          <td></td>
+          <td class="two" ><input type="number" placeholder="Enter the mark" name="num6"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="one">Total</td>
+            <td><input type="text" name="totalMarks"></td><br>
+          </tr>
+      </table>
+      
+      <input class="btn" type="button" value="Calculate" onclick="cal()">
+      <button class="bt">Submit</button>
+      <button class="bt">Back</button>
+    </div>
+</center>
+</body>
+<script>
+  function cal() {
+    let num1 = document.getElementsByName("num1")[0].value;
+    let num2 = document.getElementsByName("num2")[0].value;
+    let num3 = document.getElementsByName("num3")[0].value;
+    let num4 = document.getElementsByName("num4")[0].value;
+    let num5 = document.getElementsByName("num5")[0].value;
+    let num6 = document.getElementsByName("num6")[0].value;
+    let sum = Number(num1) + Number(num2)+ Number(num3)+Number(num4)+Number(num5)
+    +Number(num6);
+    document.getElementsByName("totalMarks")[0].value = sum;
+}
+</script>
+</html>

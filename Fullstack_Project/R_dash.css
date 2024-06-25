@@ -1,0 +1,64 @@
+h1 {
+    display: inline;
+}
+
+nav {
+    float: right;
+    margin-top: 10px;
+    
+}
+
+nav a {
+    margin-left: 20px;
+    color: rgb(72, 62, 62);
+}
+
+.one {
+    background-color: aqua;
+    border-radius: 5px;
+    height: 30px;
+    width: 200px;
+    margin-top: 50px;
+    margin-right: 30px;
+}
+
+#logout {
+    float: right;
+    background-color: rgb(230, 139, 165);
+    border-radius: 5px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+
+.one:hover {
+    background-color: rgb(166, 235, 241);
+    cursor: pointer;
+    
+}
+
+#logout:hover {
+    background-color: rgb(240, 82, 101);
+    cursor: pointer;
+}
+.k{
+    margin-right: 50px;
+}
+#div{
+    margin-top: 5px;
+    background-color: rgb(199, 193, 239);
+    height: 65px;
+
+}
+nav a:hover{
+    color: rgb(11, 11, 11);
+}
+
+#d{
+    background-color: rgb(203, 213, 213);
+    height: 650px;
+    width: auto;
+    text-align: right;
+    border: solid rgb(53, 47, 47);
+}

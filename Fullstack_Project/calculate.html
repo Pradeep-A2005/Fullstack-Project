@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reward points calculation</title>
+    <link rel="icon" href="icon.png">
+    <style>
+       
+        label {
+            display: inline-block;
+            width: 150px; 
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 150px; 
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        div{
+
+            margin-top: 50px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #sub{
+
+            margin-left: 400px;
+            background-color: aqua;
+            border-radius: 5px;
+            width: 100px;
+        }
+        #back{
+            background-color: aqua;
+            border-radius: 5px;
+            width: 100px;
+        }
+        #sub:hover{
+            background-color: antiquewhite;
+            cursor: pointer;
+        }
+        #back:hover{
+            background-color: antiquewhite;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Reward Points Calculation</h2>
+<center>
+    <br>
+    <label>Student Name:</label>
+    <input type="text" placeholder="Student Name">
+    <label>Ptac ID:</label>
+    <input type="number">
+    <div id="cal">
+        <label>Initial Mark:</label>
+        <input type="number">
+        <br>
+        <label>Submission Mark:</label>
+        <input type="number">
+        <br>
+        <label>Plagiarism Mark:</label>
+        <input type="number">
+        <br>
+        <label>Student Worklog:</label>
+        <input type="number">
+        <br>
+        <br><br>
+        <a href="admin_dash.html"><button id="back">Back</button></a>
+        <input type="submit" id="sub">
+    </div>
+</center>
+
+
+</body>
+</html>

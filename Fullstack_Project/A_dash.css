@@ -1,0 +1,73 @@
+h1 {
+    display: inline;
+    margin-left: 5px;
+}
+
+nav {
+    float: right;
+    margin-top: 10px;
+}
+
+nav a {
+    margin-left: 20px;
+    color: rgb(0, 0, 0);
+}
+nav a:hover{
+    color: rgb(88, 72, 72);
+}
+
+.one {
+    background-color: aqua;
+    border-radius: 5px;
+    height: 60px;
+    margin-top: 50px;
+    text-align: center;
+    margin-right: 30px;
+}
+
+#logout {
+    float: right;
+    background-color: rgb(230, 139, 165);
+    border-radius: 5px;
+    margin-right: 20px;
+    height: 30px;
+}
+#logout:hover{
+    background-color: rgb(243, 65, 65);
+    cursor: pointer;
+}
+
+.one:hover {
+    background-color: rgb(166, 235, 241);
+    cursor: pointer;
+}
+
+.k{
+    margin-right: 50px;
+}
+#div{
+    padding-top: 13px;
+    background-color: rgb(208, 194, 243);
+    height: 70px;
+}
+#div1{
+    background-color: rgb(221, 240, 240);
+    height: 660px;
+    width: auto;
+    text-align: right;
+    border: solid rgb(59, 52, 52);
+}
+body{
+    background-color: black;
+}
+#btn{
+    background-color: aqua;
+    margin-top: 50px;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+#btn:hover{
+    background-color: rgb(168, 246, 246);
+    cursor: pointer;
+}
