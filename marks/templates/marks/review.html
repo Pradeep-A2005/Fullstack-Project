@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviewer Mark</title>
+    <link rel="stylesheet" href="review.css">
+    <link rel="icon" href="icon.png">
+    <script src="review.js"></script>
+   
+    
+</head>
+<body style="background-color: aquamarine;">
+  <center>
+    
+  <form action="">
+        <label>Student name:</label>
+        <input type="text" class="l">
+        <br>
+    <label>Ptac ID:</label>
+    <input type="Number" class="t">
+      </li>
+    </ol>
+   
+  </form>
+
+  <h1 ><u>Reviewer Mark</u></h1>
+        <div id="one">
+        <table style="width:100%" >
+            <tr>
+              <th>S.No</th>
+              <th>Description</th>
+              <th>Marks(10)</th>
+            </tr>
+            <tr>
+              <td class="one">1.</td>
+              <td></td>
+              <td class="two"><input type="number" placeholder="Enter the mark" name="num1"></td>
+            </tr>
+            <tr>
+              <td class="one">2.</td>
+              <td></td>
+              <td class="two"><input type="number" placeholder="Enter the mark" name="num2"></td>
+            </tr>
+            <tr>
+              <td class="one">3.</td>
+              <td></td>
+              <td class="two"><input type="number" placeholder="Enter the mark" name="num3"></td>
+            </tr>
+            <tr>
+              <td class="one">4.</td>
+              <td></td>
+              <td class="two"><input type="number" placeholder="Enter the mark" name="num4"></td>
+            </tr>
+            <tr>
+              <td class="one" >5.</td>
+              <td></td>
+              <td class="two"><input type="number" placeholder="Enter the mark" name="num5"></td>
+            </tr>
+            <tr>
+              <td class="one">6.</td>
+              <td></td>
+              <td class="two" ><input type="number" placeholder="Enter the mark" name="num6"></td>
+            </tr>
+            <tr>
+                <td class="one">7.</td>
+                <td></td>
+                <td class="two" ><input type="number" placeholder="Enter the mark" name="num7"></td>
+              </tr>
+              <tr>
+                <td class="one">8.</td>
+                <td></td>
+                <td class="two" ><input type="number" placeholder="Enter the mark" name="num8"></td>
+              </tr>
+              <tr>
+                <td class="one">9.</td>
+                <td></td>
+                <td class="two" ><input type="number" placeholder="Enter the mark" name="num9"></td>
+              </tr>
+              <tr>
+                <td class="one">10.</td>
+                <td></td>
+                <td class="two" ><input type="number" placeholder="Enter the mark" name="num10"></td>
+              </tr>
+            <tr>
+                <td></td>
+                <td class="one">Total</td>
+                <td><input type="text" name="totalMarks"></td><br>
+              </tr>
+          </table>
+
+          <input class="bt" type="button" value="Calculate" onclick="cal()">
+        </div>
+
+        <div>
+          <br>
+          <div id="two">
+              <h1><u>Team Communication Mark</u></h1>
+              <br>
+              <table style="width:100%">
+                  <tr>
+                      <th>S.No</th>
+                      <th>Description</th>
+                      <th>Marks(5)</th>
+                  </tr>
+                  <tr>
+                      <td class="one">1.</td>
+                      <td></td>
+                      <td class="two"><input type="number" placeholder="Enter the mark" name="n1"></td>
+                  </tr>
+                  <tr>
+                      <td class="one">2.</td>
+                      <td></td>
+                      <td class="two"><input type="number" placeholder="Enter the mark" name="n2"></td>
+                  </tr>
+                  <tr>
+                      <td class="one">3.</td>
+                      <td></td>
+                      <td class="two"><input type="number" placeholder="Enter the mark" name="n3"></td>
+                  </tr>
+                  <tr>
+                      <td class="one">4.</td>
+                      <td></td>
+                      <td class="two"><input type="number" placeholder="Enter the mark" name="n4"></td>
+                  </tr>
+                  <tr>
+                      <td class="one">5.</td>
+                      <td></td>
+                      <td class="two"><input type="number" placeholder="Enter the mark" name="n5"></td>
+                  </tr>
+                  <tr>
+                      <td class="one">6.</td>
+                      <td></td>
+                      <td class="two"><input type="number" placeholder="Enter the mark" name="n6"></td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                      <td class="one">Total</td>
+                      <td><input type="text" name="Mark"></td><br>
+                  </tr>
+              </table>
+              <a href="reviewer_dashboard.html"><button class="b">Back</button></a>
+              <input class="bt" type="button" value="Calculate" onclick="calo()">
+              <form id="marksForm"></form>
+              <button type="submit" class="b">Submit</button>              
+          </div>
+      </div>
+    </center>
+    
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
+</head>
+<body style="background-color:rgb(228, 238, 237);">     
+    <center>
+        <h2>BANNARI  AMMAN  INSTITUE  OF  TECHNOLOGY</h2>
+        <div>
+            <p>Reward Points Calculation Portal for Tac</p>
+            <hr style="width: 150px;">
+            <img src="{% static 'images/icon.png' %}" alt="img" >
+            <h2>Sign in</h2>
+            <a href="{% url 'admin_login' %}"><button class="btn1">Admin Login</button></a>
+            <a href="{% url 'reviewer_login' %}"><button class="btn2">Reviewer Login</button></a>
+            <br>
+            <h4>Sign in with your BIT account</h4>
+        </div>
+    </center>
+</body>
+</html>

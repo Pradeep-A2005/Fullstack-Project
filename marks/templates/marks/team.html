@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIT Reward Point Portal</title>
+    <link rel="stylesheet" href="{% static 'css/team.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
+    <script src="{% static 'js/team.js' %}"></script>
+    <style>
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #023e8a;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover, .close:focus {
+            color: black;
+            cursor: pointer;
+        }
+        .modal-profile-photo {
+            border-radius: 50%;
+            border: 2px solid #0077b6;
+            height: 100px;
+            width: 100px;
+        }
+        .modal-header h2 {
+            margin-top: 10px;
+        }
+        .modal-body p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="color: rgb(251, 249, 249);">BIT - RP PORTAL FOR TAC</h1>
+        <nav>
+            <a href="{% url 'reviewer_dashboard' %}" title="Dashboard">🏠︎ Dashboard</a>
+            <a href="{% url 'select1' %}" title="Calculate Marks">📊 Calculate Marks</a>
+            <a href="{% url 'review_view' %}" title=" View Reviewer Marks">📝 Reviewer Marks</a>
+            <a href="#profile" onclick="showModal()" title="View Profile">👤 Profile</a>
+            <a href="{% url 'index' %}" title="Logout">↪ Logout</a>
+        </nav>
+    </header>
+
+<!-- Modal for Profile -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <div class="modal-header">
+            <img src="{% static 'images/profile.png' %}" alt="Profile Photo" class="modal-profile-photo">
+            <h2>Reviewer Name</h2>
+        </div>
+        <div class="modal-body">
+            <p><strong>ID:</strong> 12345</p>
+            <p><strong>Department:</strong> Information Technology</p>
+            <button class="attractive-button" onclick="hideModal()">Close ❌</button>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        <h1>Team Communication Mark</h1>
+        <form id="markForm" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="student">Student <span class="red-star">*</span></label>
+                <select id="student" name="student" required style="font-size: medium;">
+                    <option value="" disabled selected>-- Select Student --</option>
+                    {% for student in students %}
+                        <option value="{{ student.id }}">{{ student.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="explanation">Explanation <span class="red-star">*</span></label>
+                <input type="number" id="explanation" name="explanation" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="novelty">Novelty <span class="red-star">*</span></label>
+                <input type="number" id="novelty" name="novelty" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="plagiarism">Plagiarism <span class="red-star">*</span></label>
+                <input type="number" id="plagiarism" name="plagiarism" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="originality">Originality of Work <span class="red-star">*</span></label>
+                <input type="number" id="originality" name="originality" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="innovation">Uniqueness/Innovation <span class="red-star">*</span></label>
+                <input type="number" id="innovation" name="innovation" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="qna">Q & A <span class="red-star">*</span></label>
+                <input type="number" id="qna" name="qna" min="0" max="10" required>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="goBack()">Back</button>
+                <button type="submit">Submit & Next</button>
+            </div>
+        </form>
+        
+    </div>
+    <center>
+        <footer style="margin-bottom: 30px;">
+            BIT Reward points portal for TAC - Bannari Amman Institute of Technology
+        </footer>
+    </center>
+    <script>
+
+        function showModal() {
+            document.getElementById("profileModal").style.display = "block";
+        }
+
+        function hideModal() {
+            document.getElementById("profileModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("profileModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const studentName = params.get('name');
+            const ptacId = params.get('ptacId');
+            
+            if (studentName) {
+                document.getElementById('student').innerHTML = `<option value="${studentName}" selected>${studentName}</option>`;
+            }
+            
+            if (ptacId) {
+                document.getElementById('ptacId').innerHTML = `<option value="${ptacId}" selected>${ptacId}</option>`;
+            }
+        }
+        
+        window.onload = getQueryParams;
+
+        function goBack() {
+            window.history.back();
+        }
+        
+        document.getElementById("markForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            const formElements = event.target.elements;
+            let allValid = true;
+        
+            for (let i = 0; i < formElements.length; i++) {
+                if (formElements[i].type === "number") {
+                    const value = formElements[i].value;
+                    if (value < 0 || value > 10) {
+                        allValid = false;
+                        alert("Marks must be between 0 and 10.");
+                        break;
+                    }
+                }
+            }
+        
+            if (allValid) {
+                window.location.href = '{% url 'review_mark' %}'; 
+            }
+        });
+        
+        </script> 
+</body>
+</html>

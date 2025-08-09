@@ -1,0 +1,52 @@
+div {
+    background-color: #ffffff; 
+    width: 400px;
+    height: 540px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    margin-top: 50px;
+}
+
+.btn1, .btn2 {
+    margin-top: 30px;
+    background-color: #0077b6; 
+    color: white; 
+    width: 300px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none; 
+    font-size: 16px; 
+}
+
+.btn1:hover, .btn2:hover {
+    background-color: #00a2ff; 
+}
+
+h2 {
+    color: #333; 
+    font-size: 24px; 
+}
+
+#scroll {
+    color: #333; 
+    
+}
+
+img {
+    height: 150px;
+    width: 200px;
+    margin-top: 30px;
+    border-color: #0077b6; 
+    border-radius: 5px;
+    border: solid 2px; 
+}
+
+p {
+    padding-top: 10px;
+    color: #333; 
+    font-size: 24px; 
+}

@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Mark Entry</title>
+    <link rel="stylesheet" href="{% static 'css/Admin_mark.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
+    <style>
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #023e8a;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>BIT - RP PORTAL FOR TAC</h1>
+        <nav>
+            <a href="{% url 'admin_dash' %}">🏠︎ Dashboard </a>
+            <a href="{% url 'select' %}">📊 Calculate Marks </a>
+            <a href="{% url 'admin_view' %}">📝 Admin Marks </a>
+            <a href="{% url 'admin_access' %}">🎯 Total Marks </a>
+            <a href="#profile" onclick="showModal()">👤 Profile </a>
+            <a href="{% url 'index' %}">↪ Logout </a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h2>Admin Mark</h2>
+        <form id="markForm" method="post">
+            {% csrf_token %}
+        
+            <label for="student">Student <span class="red-star">*</span></label>
+            <select id="student" name="student" required>
+                <option value="" disabled selected>-- Select Student --</option>
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="ptacId">PTAC ID <span class="red-star">*</span></label>
+            <select id="ptacId" name="ptacId" required>
+                <option value="" disabled selected>-- Select PTAC ID --</option>
+                {% for ptac in ptac_ids %}
+                <option value="{{ ptac.id }}">{{ ptac.ptac_id }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="initialMark">Initial Mark <span class="red-star">*</span></label>
+            <select id="initialMark" name="initialMark" required>
+                <option value="" disabled selected>Select Initial Mark</option>
+                <option value="5">5</option>
+            </select>
+
+            <label for="finalMark">Final Submission Mark <span class="red-star">*</span></label>
+            <select id="finalMark" name="finalMark" required>
+                <option value="" disabled selected>Select Final Mark</option>
+                <option value="10">10</option>
+            </select>
+
+            <label for="plagiarism">Plagiarism <span class="red-star">*</span></label>
+            <select id="plagiarism" name="plagiarism" required>
+                <option value="" disabled selected>Select Plagiarism Mark</option>
+                <option value="5">5 Marks</option>
+                <option value="3">3 Marks</option>
+                <option value="0">0 Marks</option>
+            </select>
+
+            <label for="workLog">Work Log <span class="red-star">*</span></label>
+            <select id="workLog" name="workLog" required>
+                <option value="" disabled selected>Select Work Log Mark</option>
+                <option value="2">2 Marks</option>
+                <option value="4">4 Marks</option>
+                <option value="8">8 Marks</option>
+                <option value="10">10 Marks</option>
+            </select>
+
+            <div class="form-buttons">
+                <button type="button" onclick="goBack()">Back</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const studentName = params.get('name');
+            const ptacId = params.get('ptacId');
+            
+            if (studentName) {
+                document.getElementById('student').innerHTML = `<option value="${studentName}" selected>${studentName}</option>`;
+            }
+            
+            if (ptacId) {
+                document.getElementById('ptacId').innerHTML = `<option value="${ptacId}" selected>${ptacId}</option>`;
+            }
+        }
+        
+        window.onload = getQueryParams;
+        </script>        
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+        
+        {% comment %} document.getElementById('markForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Marks Submitted Successfully in Database');
+        }); {% endcomment %}
+        
+    </script>
+</body>
+</html>

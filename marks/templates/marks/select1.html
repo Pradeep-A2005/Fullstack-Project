@@ -1,0 +1,319 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Selection Table</title>
+    <link rel="stylesheet" href="{% static 'css/select1.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
+    <script src="{% static 'js/select1.js' %}"></script>
+    <style>
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #023e8a;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover, .close:focus {
+            color: black;
+            cursor: pointer;
+        }
+        .modal-profile-photo {
+            border-radius: 50%;
+            border: 2px solid #0077b6;
+            height: 100px;
+            width: 100px;
+        }
+        .modal-header h2 {
+            margin-top: 10px;
+        }
+        .modal-body p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    {% comment %} <nav class="navbar">
+        <div class="navbar-left">
+            <span class="brand">BIT REWARD POINT PORTAL FOR TAC</span>
+        </div>
+        <div class="navbar-right">
+            <input type="text" placeholder="⌕ Press / to search" class="search-bar">
+            <div class="profile-menu">
+                <span class="profile-name" onclick="showModal()">Reviewer profile ▼</span>
+                <div class="dropdown-content">
+                    <div style="display: flex; align-items: center;">
+                        <img src="{% static 'images/profile.png' %}" height="30px" width="30px" style="border: solid #ffffff; border-radius: 28px;">
+                        <a href="javascript:void(0)" onclick="showModal()" style="margin-left: 1px;">Profile</a>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <img src="{% static 'images/logout.png' %}" height="30px" width="30px" style="border: solid #ffffff; border-radius: 28px;">
+                        <a href="{% url 'index' %}" style="margin-left: 1px;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav> {% endcomment %}
+    <header>
+        <h1>BIT - RP PORTAL FOR TAC</h1>
+        <nav>
+            <a href="{% url 'reviewer_dashboard' %}" title="Dashboard">🏠︎ Dashboard</a>
+            <a href="{% url 'select1' %}" title="Calculate Marks">📊 Calculate Marks</a>
+            <a href="{% url 'review_view' %}" title=" View Reviewer Marks">📝 Reviewer Marks</a>
+            <a href="#profile" onclick="showModal()" title="View Profile">👤 Profile</a>
+            <a href="{% url 'index' %}" title="Logout">↪ Logout</a>
+        </nav>
+    </header>
+
+    <!-- Modal for Profile -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <div class="modal-header">
+            <img src="{% static 'images/profile.png' %}" alt="Profile Photo" class="modal-profile-photo">
+            <h2>Reviewer Name</h2>
+        </div>
+        <div class="modal-body">
+            <p><strong>ID:</strong> 12345</p>
+            <p><strong>Department:</strong> Information Technology</p>
+            <button class="attractive-button" onclick="hideModal()">Close ❌</button>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        <h4>Select PTAC-ID</h4>
+        <input type="text" id="searchBar" placeholder="Search by PTAC ID or Name..." onkeyup="filterTable()">
+    
+        <div class="selected-label" id="selectedLabel" style="display: none;">
+            <strong>Selected <span id="selectedCount">0</span></strong>
+            <button id="downloadSelected" onclick="downloadSelected()" style="margin-left: 1150px;">Download</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>PTAC-ID</th>
+                        <th>Student Name</th>
+                        <th>Academic Year</th>
+                        <th>Semester</th>
+                        <th>Project Category</th>
+                        <th>Project Title</th>
+                        <th style="padding-left: 50px;">Click</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable">
+                    {% for student in students %}
+                    <tr>
+                        <td><input type="checkbox" class="select-row"></td>
+                        <td>{{ student.ptac_id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.academic_year }}</td>
+                        <td>{{ student.semester }}</td>
+                        <td>{{ student.project_category }}</td>
+                        <td>{{ student.project_title }}</td>
+                        
+                        {% comment %} <td>
+                            {% if student.abstract_file %}
+                                <button onclick="viewPDF('{% static 'pdfs/' %}{{ student.abstract_file.name }}')">View Abstract</button>
+                            {% else %}
+                                <span>No Abstract</span>
+                            {% endif %}
+                        </td>                         {% endcomment %}
+                        <td><a href="{% url 'team' %}?name={{ student.name|urlencode }}&ptacId={{ student.ptac_id }}">
+                            <button class="mark-button">Provide Mark</button>
+                        </a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination-info">
+            <span id="totalStudents" style="margin-top: 20px;">Total Students: 0</span>
+        </div>
+        
+        <div class="pagination">
+            <button class="prev-button">Previous</button>
+            <button class="next-button">Next</button>
+        </div>
+        
+    </div>
+    <center><p style="margin-bottom: 20px;">BIT Reward points portal for TAC - Bannari Amman Institute of Technology</p>
+    </center>
+    <script>
+
+        function showModal() {
+            document.getElementById("profileModal").style.display = "block";
+        }
+
+        function hideModal() {
+            document.getElementById("profileModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("profileModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const selectAll = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.select-row');
+            const selectedLabel = document.getElementById('selectedLabel');
+            const selectedCount = document.getElementById('selectedCount');
+
+            function updateSelectedCount() {
+                let count = 0;
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) count++;
+                });
+                selectedCount.textContent = count;
+                selectedLabel.style.display = count > 0 ? 'flex' : 'none';
+            }
+
+            selectAll.addEventListener('change', () => {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = selectAll.checked;
+                });
+                updateSelectedCount();
+            });
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelectedCount);
+            });
+
+            let currentPage = 1;
+            const studentsPerPage = 10;
+
+            function updatePagination() {
+                const rows = document.querySelectorAll('#studentTable tr');
+                const totalStudents = rows.length;
+
+                const start = (currentPage - 1) * studentsPerPage + 1;
+                const end = Math.min(currentPage * studentsPerPage, totalStudents);
+
+                document.getElementById('totalStudents').textContent = `Showing ${start} - ${end} `;
+
+                rows.forEach((row, index) => {
+                    row.style.display = (index >= start - 1 && index < end) ? '' : 'none';
+                });
+
+                document.querySelector('.prev-button').disabled = currentPage === 1;
+
+                document.querySelector('.next-button').disabled = end >= totalStudents;
+            }
+
+            document.querySelector('.next-button').addEventListener('click', () => {
+                currentPage++;
+                updatePagination();
+            });
+
+            document.querySelector('.prev-button').addEventListener('click', () => {
+                if (currentPage > 1) currentPage--;
+                updatePagination();
+            });
+
+            updatePagination();
+
+            function filterTable() {
+                const input = document.getElementById("searchBar").value.toUpperCase();
+                const table = document.getElementById("studentTable");
+                const tr = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < tr.length; i++) {
+                    const tdPTAC = tr[i].getElementsByTagName("td")[1];
+                    const tdName = tr[i].getElementsByTagName("td")[2];
+
+                    if (tdPTAC || tdName) {
+                        const ptacValue = tdPTAC.textContent || tdPTAC.innerText;
+                        const nameValue = tdName.textContent || tdName.innerText;
+
+                        if (ptacValue.toUpperCase().indexOf(input) > -1 || nameValue.toUpperCase().indexOf(input) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }       
+                }
+            }
+
+            document.getElementById('searchBar').addEventListener('keyup', filterTable);
+
+            function downloadSelected() {
+                const selectedCheckboxes = document.querySelectorAll('.select-row:checked');
+                const studentDetails = [];
+
+                selectedCheckboxes.forEach((checkbox) => {
+                    const row = checkbox.parentElement.parentElement;
+                    const ptacId = row.cells[1].textContent;
+                    const name = row.cells[2].textContent;
+                    studentDetails.push({ ptacId, name });
+                });
+
+                const csvContent = 'data:text/csv;charset=utf-8,PTAC-ID,Student Name\n' +
+                    studentDetails.map(e => `${e.ptacId},${e.name}`).join('\n');
+
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement('a');
+                link.setAttribute('href', encodedUri);
+                link.setAttribute('download', 'selected_students.csv');
+                document.body.appendChild(link);
+                link.click();
+            }
+
+            document.getElementById('downloadSelected').addEventListener('click', downloadSelected);
+        });
+    </script>
+</body>
+</html>

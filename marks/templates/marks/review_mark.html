@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviewer Mark</title>
+    <link rel="stylesheet" href="{% static 'css/review_mark.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
+    <script src="{% static 'js/review_mark.js' %}"></script>
+    <style>
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #023e8a;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover, .close:focus {
+            color: black;
+            cursor: pointer;
+        }
+        .modal-profile-photo {
+            border-radius: 50%;
+            border: 2px solid #0077b6;
+            height: 100px;
+            width: 100px;
+        }
+        .modal-header h2 {
+            margin-top: 10px;
+        }
+        .modal-body p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    {% comment %} <nav class="navbar">
+        <div class="navbar-left">
+            <span class="brand" style="color: rgb(248, 248, 248);">BIT REWARD POINT PORTAL FOR TAC</span>
+        </div>
+        <div class="navbar-right">
+            <div class="search-bar">
+                <input type="text" placeholder="⌕ Press / to search">
+            </div>
+            <div class="profile-menu">
+                <span class="profile-name" onclick="showModal()">Reviewer profile ▼</span>
+                <div class="dropdown-content">
+                    <div style="display: flex; align-items: center;">
+                        <img src="{% static 'images/profile.png' %}" height="30px" width="30px" style="border: solid #ffffff; border-radius: 28px;">
+                        <a href="javascript:void(0)" onclick="showModal()" style="margin-left: 1px;">Profile</a>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <img src="{% static 'images/logout.png' %}" height="30px" width="30px" style="border: solid #ffffff; border-radius: 28px;">
+                        <a href="{% url 'index' %}" style="margin-left: 1px;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav> {% endcomment %}
+    <header>
+        <h1 style="color: rgb(251, 249, 249);">BIT - RP PORTAL FOR TAC</h1>
+        <nav>
+            <a href="{% url 'reviewer_dashboard' %}" title="Dashboard">🏠︎ Dashboard</a>
+            <a href="{% url 'select1' %}" title="Calculate Marks">📊 Calculate Marks</a>
+            <a href="{% url 'review_view' %}" title=" View Reviewer Marks">📝 Reviewer Marks</a>
+            <a href="#profile" onclick="showModal()" title="View Profile">👤 Profile</a>
+            <a href="{% url 'index' %}" title="Logout">↪ Logout</a>
+        </nav>
+    </header>
+
+<!-- Modal for Profile -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <div class="modal-header">
+            <img src="{% static 'images/profile.png' %}" alt="Profile Photo" class="modal-profile-photo">
+            <h2>Reviewer Name</h2>
+        </div>
+        <div class="modal-body">
+            <p><strong>ID:</strong> 12345</p>
+            <p><strong>Department:</strong> Information Technology</p>
+            <button class="attractive-button" onclick="hideModal()">Close ❌</button>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        <h1>Reviewer Mark</h1>
+        <br>
+        <form id="reviewerMarkForm">
+            <div class="form-group">
+                <label for="mark1">1. Explanation of the project's objectives and goals <span class="red-star">*</span></label>
+                <input type="number" id="mark1" name="mark1" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark2">2. Originality and novelty of the project idea <span class="red-star">*</span></label>
+                <input type="number" id="mark2" name="mark2" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark3">3. Technical complexity and implementation of the project <span class="red-star">*</span></label>
+                <input type="number" id="mark3" name="mark3" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark4">4. Adherence to ethical standards and plagiarism check <span class="red-star">*</span></label>
+                <input type="number" id="mark4" name="mark4" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark5">5. Effectiveness of the project in solving the proposed problem <span class="red-star">*</span></label>
+                <input type="number" id="mark5" name="mark5" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark6">6. Team collaboration and communication <span class="red-star">*</span></label>
+                <input type="number" id="mark6" name="mark6" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark7">7. Innovation and creativity in the project's approach <span class="red-star">*</span></label>
+                <input type="number" id="mark7" name="mark7" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark8">8. Project's impact and scalability potential <span class="red-star">*</span></label>
+                <input type="number" id="mark8" name="mark8" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark9">9. Use of technology and tools in the project <span class="red-star">*</span></label>
+                <input type="number" id="mark9" name="mark9" min="0" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="mark10">10. Quality of the answers in the Q & A session <span class="red-star">*</span></label>
+                <input type="number" id="mark10" name="mark10" min="0" max="10" required>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="goBack()">Back</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+        <center>
+        <footer style="margin-bottom: 30px;">
+            BIT Reward points portal for TAC - Bannari Amman Institute of Technology
+        </footer>
+    </center>
+    <script>
+
+        function showModal() {
+            document.getElementById("profileModal").style.display = "block";
+        }
+
+        function hideModal() {
+            document.getElementById("profileModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("profileModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+        document.getElementById("reviewerMarkForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+        
+            const formElements = event.target.elements;
+            let allValid = true;
+        
+            for (let i = 0; i < formElements.length; i++) {
+                if (formElements[i].type === "number") {
+                    const value = formElements[i].value;
+                    if (value === "" || value < 0 || value > 10) {
+                        allValid = false;
+                        alert("All marks must be filled and between 0 and 10.");
+                        break;
+                    }
+                }
+            }
+        
+            if (allValid) {
+                alert("Marks submitted successfully in Database!");
+            }
+        });
+        
+        
+    </script>
+</body>
+</html>

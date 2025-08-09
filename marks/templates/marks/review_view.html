@@ -1,0 +1,397 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Marks View</title>
+    <link rel="stylesheet" href="{% static 'css/review_view.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
+    <style>
+        #selectedContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #d4f1ff;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+        }
+        #selectedCount {
+            color: rgb(5, 5, 5);
+            font-size: 16px;
+        }
+        #downloadButton {
+            padding: 5px 10px;
+            background-color: #0077b6;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+          }
+          #downloadButton:hover {
+            background-color: #005f8a;
+          }
+
+          /* Pagination */
+            .pagination-info {
+            font-size: 16px;
+            margin-top:20px;
+            margin-bottom: 10px;
+            text-align: center; /* Center align the student count */
+            }
+
+            .pagination {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+            }
+
+            /* Pagination buttons */
+            .prev-button, .next-button {
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            }
+
+            .prev-button:hover, .next-button:hover {
+            background-color: #5a6268;
+            }
+
+            header {
+                background-color: #0077b6;
+                color: white;
+                padding: 15px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            header h1 {
+                margin: 0;
+                font-size: 24px;
+            }
+            nav {
+                display: flex;
+                gap: 15px;
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                font-size: 16px;
+                padding: 10px 15px;
+                border-radius: 5px;
+            }
+            nav a:hover {
+                background-color: #023e8a;
+            }
+
+            /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover, .close:focus {
+            color: black;
+            cursor: pointer;
+        }
+        .modal-profile-photo {
+            border-radius: 50%;
+            border: 2px solid #0077b6;
+            height: 100px;
+            width: 100px;
+        }
+        .modal-header h2 {
+            margin-top: 10px;
+        }
+        .modal-body p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    {% comment %} <nav class="navbar">
+        <div class="navbar-left">
+            <span class="brand">BIT REWARD POINT PORTAL FOR TAC</span>
+        </div>
+        <div class="navbar-right">
+            <div class="search-bar">
+                <input type="text" placeholder="⌕ Press / to search">
+            </div>
+            <div class="profile-menu">
+                <span class="profile-name" onclick="showModal()">Reviewer profile ▼</span>
+                <div class="dropdown-content">
+                    <div style="display: flex; align-items: center;">
+                        <img src="{% static 'images/profile.png' %}" height="30px" width="30px" style="border: solid #ffffff; border-radius: 28px;">
+                        <a href="javascript:void(0)" onclick="showModal()" style="margin-left: 1px;">Profile</a>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <img src="{% static 'images/logout.png' %}" height="30px" width="30px" style="border: solid #ffffff; border-radius: 28px;">
+                        <a href="{% url 'index' %}" style="margin-left: 1px;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav> {% endcomment %}
+
+    <header>
+        <h1>BIT - RP PORTAL FOR TAC</h1>
+        <nav>
+            <a href="{% url 'reviewer_dashboard' %}" title="Dashboard">🏠︎ Dashboard</a>
+            <a href="{% url 'select1' %}" title="Calculate Marks">📊 Calculate Marks</a>
+            <a href="{% url 'review_view' %}" title=" View Reviewer Marks">📝 Reviewer Marks</a>
+            <a href="#profile" onclick="showModal()" title="View Profile">👤 Profile</a>
+            <a href="{% url 'index' %}" title="Logout">↪ Logout</a>
+        </nav>
+    </header>
+
+    <!-- Modal for Profile -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <div class="modal-header">
+            <img src="{% static 'images/profile.png' %}" alt="Profile Photo" class="modal-profile-photo">
+            <h2>Reviewer Name</h2>
+        </div>
+        <div class="modal-body">
+            <p><strong>ID:</strong> 12345</p>
+            <p><strong>Department:</strong> Information Technology</p>
+            <button class="attractive-button" onclick="hideModal()">Close ❌</button>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Total Marks of Team & Reviewer</h2>
+            <input type="text" id="searchBar" placeholder="Search by PTAC ID or Name..." onkeyup="filterTable()">
+            
+            <div id="selectedContainer">
+                <div id="selectedCount">Selected PTAC IDs: 0</div>
+                <button id="downloadButton" onclick="downloadSelected()" style="color:white;">Download</button>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll()"> Select All</th>
+                        <th>PTAC-ID</th>
+                        <th>Student</th>
+                        <th>Team Communication Mark</th>
+                        <th>Reviewer Mark</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable">
+                    {% for data in combined_data %}
+                        <tr>
+                            <td><input type="checkbox" class="ptac-checkbox" onclick="updateSelectedCount()"></td>
+                            <td>{{ data.ptac_id }}</td>
+                            <td>{{ data.student }}</td>
+                            <td>{{ data.team_total_mark }}</td>
+                            <td>{{ data.reviewer_total_mark }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <div class="pagination-info">
+                <span id="totalStudents" style="margin-top: 20px;">Total Students: 0</span>
+            </div>
+            
+            <div class="pagination">
+                <button class="prev-button">Previous</button>
+                <button class="next-button">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>BIT Reward points portal for TAC - Bannari Amman Institute of Technology</p>
+    </footer>
+
+<script>
+
+    function showModal() {
+        document.getElementById("profileModal").style.display = "block";
+    }
+
+    function hideModal() {
+        document.getElementById("profileModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("profileModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function updateSelectedCount() {
+        const checkboxes = document.querySelectorAll('.ptac-checkbox');
+        const selectedCount = document.getElementById('selectedCount');
+        const downloadButton = document.getElementById('downloadButton');
+        const selectedContainer = document.getElementById('selectedContainer');
+        let count = 0;
+        
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                count++;
+            }
+        });
+        
+        selectedCount.textContent = `Selected PTAC IDs: ${count}`;
+        
+        if (count > 0) {
+            selectedContainer.style.display = 'flex';  
+        } else {
+            selectedContainer.style.display = 'none'; 
+        }
+    }
+
+    let currentPage = 1;
+    const studentsPerPage = 10;
+
+    function updatePagination() {
+        const rows = document.querySelectorAll('#studentTable tr');
+        const totalStudents = rows.length;
+
+        const start = (currentPage - 1) * studentsPerPage + 1;
+        const end = Math.min(currentPage * studentsPerPage, totalStudents);
+
+        document.getElementById('totalStudents').textContent = `Showing ${start} - ${end} `;
+
+        rows.forEach((row, index) => {
+            row.style.display = (index >= start - 1 && index < end) ? '' : 'none';
+        });
+
+        document.querySelector('.prev-button').disabled = currentPage === 1;
+
+        document.querySelector('.next-button').disabled = end >= totalStudents;
+    }
+
+    document.querySelector('.next-button').addEventListener('click', () => {
+        currentPage++;
+        updatePagination();
+    });
+
+    document.querySelector('.prev-button').addEventListener('click', () => {
+        if (currentPage > 1) currentPage--;
+        updatePagination();
+    });
+
+    updatePagination();
+
+    function filterTable() {
+        const input = document.getElementById("searchBar").value.toUpperCase();
+        const table = document.getElementById("studentTable");
+        const tr = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < tr.length; i++) {
+            const tdPTAC = tr[i].getElementsByTagName("td")[1]; 
+            const tdName = tr[i].getElementsByTagName("td")[2]; 
+            if (tdPTAC || tdName) {
+                const ptacValue = tdPTAC.textContent || tdPTAC.innerText;
+                const nameValue = tdName.textContent || tdName.innerText;
+
+                if (ptacValue.toUpperCase().indexOf(input) > -1 || nameValue.toUpperCase().indexOf(input) > -1) {
+                    tr[i].style.display = ""; 
+                } else {
+                    tr[i].style.display = "none"; 
+                }
+            }       
+        }
+    }
+
+    function downloadSelected() {
+        const checkboxes = document.querySelectorAll('.ptac-checkbox');
+        let selectedDetails = [];
+
+        checkboxes.forEach((checkbox, index) => {
+            if (checkbox.checked) {
+                const row = checkbox.closest('tr');
+                const details = Array.from(row.getElementsByTagName('td')).map(td => td.innerText);
+                selectedDetails.push(details.join(', ')); 
+            }
+        });
+
+        if (selectedDetails.length > 0) {
+            const blob = new Blob([selectedDetails.join('\n')], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'selected_student_details.txt';
+            link.click();
+        } else {
+            alert('No student details selected for download');
+        }
+    }
+
+    function toggleSelectAll() {
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const checkboxes = document.querySelectorAll('.ptac-checkbox');
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+
+        updateSelectedCount();  
+
+        let currentPage = 1;
+        const studentsPerPage = 5;
+
+        function updatePagination() {
+            const rows = document.querySelectorAll('#studentTable tr');
+            const totalStudents = rows.length;
+
+            const start = (currentPage - 1) * studentsPerPage + 1;
+            const end = Math.min(currentPage * studentsPerPage, totalStudents);
+
+            document.getElementById('totalStudents').textContent = `Showing ${start} - ${end} `;
+
+            rows.forEach((row, index) => {
+                row.style.display = (index >= start - 1 && index < end) ? '' : 'none';
+            });
+
+            document.querySelector('.prev-button').disabled = currentPage === 1;
+
+            document.querySelector('.next-button').disabled = end >= totalStudents;
+        }
+
+        document.querySelector('.next-button').addEventListener('click', () => {
+            currentPage++;
+            updatePagination();
+        });
+
+        document.querySelector('.prev-button').addEventListener('click', () => {
+            if (currentPage > 1) currentPage--;
+            updatePagination();
+        });
+
+        updatePagination();
+    }
+</script>
+</body>
+</html>

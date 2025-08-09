@@ -1,0 +1,237 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navigation Bar */
+  .navbar {
+    background-color: #0077b6;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .brand {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #fff;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #424242;
+    background-color: #ffffff;
+    outline: none;
+    margin-right: 20px;
+  }
+  .search-bar {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #424242;
+    background-color: #ffffff;
+    outline: none;
+    margin-right: 20px;
+  }
+  
+  .profile-menu {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-menu:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    padding-top: 5px;
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    min-width: 120px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f2f2f2;
+}
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #0077b6;
+    color: white;
+    font-size: 16px;
+  }
+  
+  button[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  /* Breadcrumb */
+  .breadcrumb {
+    padding: 15px 20px;
+    background-color: #0077b6;
+    color: #fff;
+    margin-top: 20px;
+  }
+  
+  .breadcrumb a {
+    color: #d4f1ff;
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    color: #ffdd99;
+  }
+  
+  .breadcrumb span {
+    color: #ffdd99;
+  }
+  
+  /* Selected Label Styling */
+  .selected-label {
+    font-size: 16px;
+    color: #0077b6;
+    padding: 10px;
+    background-color: #d4f1ff;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+    display: none;
+  }
+  
+  .container {
+    width: 90%;
+    margin: 30px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-container {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  th {
+    background-color: #0077b6;
+    color: white;
+  }
+  
+  td {
+    position: relative;
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(1.2);
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #005f8a;
+  }
+  
+  /* Pagination */
+  .pagination-info {
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center; 
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Pagination buttons */
+  .prev-button, .next-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .prev-button:hover, .next-button:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Align Provide Mark to the right */
+  td:last-child {
+    text-align: right;
+  }
+  
+  /* Additional table container scrollbar styles */
+  .table-container::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .table-container::-webkit-scrollbar-thumb {
+    background-color: #9b9898;
+    border-radius: 5px;
+  }
+  
+  .table-container::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+  
+  #searchBar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

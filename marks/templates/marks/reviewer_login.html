@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login Page</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" href="{% static 'images/icon.png' %}">
+</head>
+<body style="background-color:rgb(228, 238, 237);">
+  <br>
+  <center>
+    <div id="home" style="text-align: center;">  
+        <h2>Welcome Back...!</h2>
+        <h4>Reviewer Login</h4>
+        <img src="{% static 'images/logo1.png' %}" alt="logo" height="150px">
+        <p>Reward Points Calculation Portal for TAC</p>
+        <hr style="width: 150px; height: 2px ; background:rgb(141, 135, 135)">
+        <form id="loginForm">
+          <ul>
+            <li>Email id: <input class="username" id="username" type="text" placeholder="Ex: User@bitsathy.ac.in" style=" margin-left: 15px;"></li>
+            <li>Password: <input class="password" id="password" type="password" placeholder="Password"></li>
+          </ul>
+          <button type="submit"  style="margin-left: 12px;">Log in</button>
+          <p style="font-size: small; margin-right: 20px; cursor:pointer">Forgot Password ?</p>
+        </form>
+        <h5 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Sign up with your Bitsathy mail id</h5>
+    </div>
+  </center>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      if (username === "review@bitsathy.ac.in" && password === "2001") {
+          window.location.href = "{% url 'reviewer_dashboard' %}";  
+      } else {
+          alert("Invalid username or password");
+      }
+  });
+  </script>
+</body>
+</html>
